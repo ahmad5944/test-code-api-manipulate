@@ -2,8 +2,7 @@
 
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
-use App\Http\Controllers\AuthController;
-use App\Http\Controllers\AntreanController;
+use App\Http\Controllers\Api\ApiController;
 
 /*
 |--------------------------------------------------------------------------
@@ -16,18 +15,6 @@ use App\Http\Controllers\AntreanController;
 |
 */
 
-Route::group(['middleware' => 'api','prefix' => 'auth'], function ($router) {
-    Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
-    Route::post('/logout', [AuthController::class, 'logout']);
-    Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/user-profile', [AuthController::class, 'userProfile']);    
-
-});
-Route::group(['middleware' => 'api','prefix' => 'antrean'], function () {
-    Route::get('/test', [AntreanController::class, 'getStatus']);
-    Route::get('/status/{kode_poli}/{tanggalperiksa}', [AntreanController::class, 'getStatus']);
-    Route::get('/', [AntreanController::class, 'getAntrean']);
-    Route::get('/sisapeserta/{nomorkartu_jkn}/{kode_poli}/{tanggalperiksa}', [AntreanController::class, 'getSisaAntrean']);
-    Route::put('/batal', [AntreanController::class, 'batalAntrean']);
+Route::group(['middleware' => 'api'], function () {
+    Route::get('/example', [ApiController::class, 'jsonManipulate']);
 });
